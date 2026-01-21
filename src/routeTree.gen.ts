@@ -10,8 +10,12 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+<<<<<<< HEAD
 import { Route as TestIndexRouteImport } from './routes/test/index'
 import { Route as TestCreateRouteImport } from './routes/test/create'
+=======
+import { Route as ActivityIndexRouteImport } from './routes/activity/index'
+>>>>>>> b7e3721531f2964bb05576a7b0e63c0c913bbb01
 import { Route as DemoFormSimpleRouteImport } from './routes/demo/form.simple'
 import { Route as DemoFormAddressRouteImport } from './routes/demo/form.address'
 
@@ -20,6 +24,7 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+<<<<<<< HEAD
 const TestIndexRoute = TestIndexRouteImport.update({
   id: '/test/',
   path: '/test/',
@@ -28,6 +33,11 @@ const TestIndexRoute = TestIndexRouteImport.update({
 const TestCreateRoute = TestCreateRouteImport.update({
   id: '/test/create',
   path: '/test/create',
+=======
+const ActivityIndexRoute = ActivityIndexRouteImport.update({
+  id: '/activity/',
+  path: '/activity/',
+>>>>>>> b7e3721531f2964bb05576a7b0e63c0c913bbb01
   getParentRoute: () => rootRouteImport,
 } as any)
 const DemoFormSimpleRoute = DemoFormSimpleRouteImport.update({
@@ -43,28 +53,41 @@ const DemoFormAddressRoute = DemoFormAddressRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+<<<<<<< HEAD
   '/test/create': typeof TestCreateRoute
   '/test/': typeof TestIndexRoute
+=======
+  '/activity/': typeof ActivityIndexRoute
+>>>>>>> b7e3721531f2964bb05576a7b0e63c0c913bbb01
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+<<<<<<< HEAD
   '/test/create': typeof TestCreateRoute
   '/test': typeof TestIndexRoute
+=======
+  '/activity': typeof ActivityIndexRoute
+>>>>>>> b7e3721531f2964bb05576a7b0e63c0c913bbb01
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+<<<<<<< HEAD
   '/test/create': typeof TestCreateRoute
   '/test/': typeof TestIndexRoute
+=======
+  '/activity/': typeof ActivityIndexRoute
+>>>>>>> b7e3721531f2964bb05576a7b0e63c0c913bbb01
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
+<<<<<<< HEAD
   fullPaths:
     | '/'
     | '/test/create'
@@ -83,14 +106,27 @@ export interface FileRouteTypes {
     | '/'
     | '/test/create'
     | '/test/'
+=======
+  fullPaths: '/' | '/activity/' | '/demo/form/address' | '/demo/form/simple'
+  fileRoutesByTo: FileRoutesByTo
+  to: '/' | '/activity' | '/demo/form/address' | '/demo/form/simple'
+  id:
+    | '__root__'
+    | '/'
+    | '/activity/'
+>>>>>>> b7e3721531f2964bb05576a7b0e63c0c913bbb01
     | '/demo/form/address'
     | '/demo/form/simple'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+<<<<<<< HEAD
   TestCreateRoute: typeof TestCreateRoute
   TestIndexRoute: typeof TestIndexRoute
+=======
+  ActivityIndexRoute: typeof ActivityIndexRoute
+>>>>>>> b7e3721531f2964bb05576a7b0e63c0c913bbb01
   DemoFormAddressRoute: typeof DemoFormAddressRoute
   DemoFormSimpleRoute: typeof DemoFormSimpleRoute
 }
@@ -104,6 +140,7 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+<<<<<<< HEAD
     '/test/': {
       id: '/test/'
       path: '/test'
@@ -116,6 +153,13 @@ declare module '@tanstack/react-router' {
       path: '/test/create'
       fullPath: '/test/create'
       preLoaderRoute: typeof TestCreateRouteImport
+=======
+    '/activity/': {
+      id: '/activity/'
+      path: '/activity'
+      fullPath: '/activity/'
+      preLoaderRoute: typeof ActivityIndexRouteImport
+>>>>>>> b7e3721531f2964bb05576a7b0e63c0c913bbb01
       parentRoute: typeof rootRouteImport
     }
     '/demo/form/simple': {
@@ -137,8 +181,12 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+<<<<<<< HEAD
   TestCreateRoute: TestCreateRoute,
   TestIndexRoute: TestIndexRoute,
+=======
+  ActivityIndexRoute: ActivityIndexRoute,
+>>>>>>> b7e3721531f2964bb05576a7b0e63c0c913bbb01
   DemoFormAddressRoute: DemoFormAddressRoute,
   DemoFormSimpleRoute: DemoFormSimpleRoute,
 }

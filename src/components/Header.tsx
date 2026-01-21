@@ -19,13 +19,13 @@ export default function Header() {
         <nav className="text-foreground">
           <ul className="flex space-x-6 ml-10">
             <li>
-              <Link to="/" className="hover:underline">
-                Create
+              <Link to="/activity" className="hover:underline">
+                Activitys
               </Link>
             </li>
             <li>
               <Link to="/" className="hover:underline">
-                Link
+                Create
               </Link>
             </li>
             <li>
