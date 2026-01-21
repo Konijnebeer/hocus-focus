@@ -192,8 +192,8 @@ function RouteComponent() {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious className="left-[25%]" />
-              <CarouselNext className="right-[25%]" />
+              <CarouselPrevious className="left-[30%]" />
+              <CarouselNext className="right-[30%]" />
             </Carousel>
           </div>
         </TabsContent>
