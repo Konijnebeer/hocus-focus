@@ -1,5 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import logo from '../logo.svg'
+import { HexButton } from "@/components/ui/hex-button"
+import { Bug } from "lucide-react"
 
 export const Route = createFileRoute('/')({
   component: App,
@@ -14,9 +16,7 @@ function App() {
           className="h-[40vmin] pointer-events-none animate-[spin_20s_linear_infinite]"
           alt="logo"
         />
-        <p>
-          Edit <code>src/routes/index.tsx</code> and save to reload.
-        </p>
+        <HexButton><Bug /></HexButton>
         <a
           className="text-[#61dafb] hover:underline"
           href="https://reactjs.org"
