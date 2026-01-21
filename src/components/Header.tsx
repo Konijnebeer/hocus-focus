@@ -24,7 +24,7 @@ export default function Header() {
               </Link>
             </li>
             <li>
-              <Link to="/" className="hover:underline">
+              <Link to="/activity/create" className="hover:underline">
                 Create
               </Link>
             </li>
