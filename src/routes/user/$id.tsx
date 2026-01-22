@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
+import { MapPin, Calendar, Timer, Users } from "lucide-react";
 
 export const Route = createFileRoute("/user/$id")({
   component: RouteComponent,
@@ -189,14 +190,24 @@ function RouteComponent() {
                                 {activity.description}
                               </p>
                               <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
-                                <span>📍 {activity.location}</span>
+                                <span className="inline-flex items-center gap-1">
+                                  <MapPin className="w-3 h-3" />{" "}
+                                  {activity.location}
+                                </span>
                                 <span>•</span>
-                                <span>📅 {activity.date}</span>
+                                <span className="inline-flex items-center gap-1">
+                                  <Calendar className="w-3 h-3" />{" "}
+                                  {activity.date}
+                                </span>
                                 <span>•</span>
-                                <span>⏱️ {activity.duration} min</span>
+                                <span className="inline-flex items-center gap-1">
+                                  <Timer className="w-3 h-3" />{" "}
+                                  {activity.duration} min
+                                </span>
                                 <span>•</span>
-                                <span>
-                                  👥 {activity.numParticipants} participants
+                                <span className="inline-flex items-center gap-1">
+                                  <Users className="w-3 h-3" />{" "}
+                                  {activity.numParticipants} participants
                                 </span>
                               </div>
                             </div>
@@ -258,14 +269,24 @@ function RouteComponent() {
                                 {activity.description}
                               </p>
                               <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
-                                <span>📍 {activity.location}</span>
+                                <span className="inline-flex items-center gap-1">
+                                  <MapPin className="w-3 h-3" />{" "}
+                                  {activity.location}
+                                </span>
                                 <span>•</span>
-                                <span>📅 {activity.date}</span>
+                                <span className="inline-flex items-center gap-1">
+                                  <Calendar className="w-3 h-3" />{" "}
+                                  {activity.date}
+                                </span>
                                 <span>•</span>
-                                <span>⏱️ {activity.duration} min</span>
+                                <span className="inline-flex items-center gap-1">
+                                  <Timer className="w-3 h-3" />{" "}
+                                  {activity.duration} min
+                                </span>
                                 <span>•</span>
-                                <span>
-                                  👥 {activity.numParticipants} participants
+                                <span className="inline-flex items-center gap-1">
+                                  <Users className="w-3 h-3" />{" "}
+                                  {activity.numParticipants} participants
                                 </span>
                               </div>
                             </div>
