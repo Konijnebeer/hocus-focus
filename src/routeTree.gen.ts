@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ActivityIndexRouteImport } from './routes/activity/index'
+import { Route as ActivityCreateRouteImport } from './routes/activity/create'
 import { Route as DemoFormSimpleRouteImport } from './routes/demo/form.simple'
 import { Route as DemoFormAddressRouteImport } from './routes/demo/form.address'
 
@@ -22,6 +23,11 @@ const IndexRoute = IndexRouteImport.update({
 const ActivityIndexRoute = ActivityIndexRouteImport.update({
   id: '/activity/',
   path: '/activity/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ActivityCreateRoute = ActivityCreateRouteImport.update({
+  id: '/activity/create',
+  path: '/activity/create',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DemoFormSimpleRoute = DemoFormSimpleRouteImport.update({
@@ -37,12 +43,14 @@ const DemoFormAddressRoute = DemoFormAddressRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/activity/create': typeof ActivityCreateRoute
   '/activity/': typeof ActivityIndexRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/activity/create': typeof ActivityCreateRoute
   '/activity': typeof ActivityIndexRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
@@ -50,18 +58,30 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/activity/create': typeof ActivityCreateRoute
   '/activity/': typeof ActivityIndexRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/activity/' | '/demo/form/address' | '/demo/form/simple'
+  fullPaths:
+    | '/'
+    | '/activity/create'
+    | '/activity/'
+    | '/demo/form/address'
+    | '/demo/form/simple'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/activity' | '/demo/form/address' | '/demo/form/simple'
+  to:
+    | '/'
+    | '/activity/create'
+    | '/activity'
+    | '/demo/form/address'
+    | '/demo/form/simple'
   id:
     | '__root__'
     | '/'
+    | '/activity/create'
     | '/activity/'
     | '/demo/form/address'
     | '/demo/form/simple'
@@ -69,6 +89,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ActivityCreateRoute: typeof ActivityCreateRoute
   ActivityIndexRoute: typeof ActivityIndexRoute
   DemoFormAddressRoute: typeof DemoFormAddressRoute
   DemoFormSimpleRoute: typeof DemoFormSimpleRoute
@@ -90,6 +111,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ActivityIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/activity/create': {
+      id: '/activity/create'
+      path: '/activity/create'
+      fullPath: '/activity/create'
+      preLoaderRoute: typeof ActivityCreateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/demo/form/simple': {
       id: '/demo/form/simple'
       path: '/demo/form/simple'
@@ -109,6 +137,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ActivityCreateRoute: ActivityCreateRoute,
   ActivityIndexRoute: ActivityIndexRoute,
   DemoFormAddressRoute: DemoFormAddressRoute,
   DemoFormSimpleRoute: DemoFormSimpleRoute,
