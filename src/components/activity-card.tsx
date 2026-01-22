@@ -10,28 +10,30 @@ import type { Activity } from "@/database/activityDb";
 
 // ActivityCard component Data
 export type ActivityCardProps = {
-  activity: Activity | {
-    title: string;
-    description: string;
-    image?: string;
-    imageUrl?: string;
-  };
+  activity:
+    | Activity
+    | {
+        title: string;
+        description: string;
+        image?: string;
+        imageUrl?: string;
+      };
 };
 
 export default function ActivityCard({ activity }: ActivityCardProps) {
   // Handle both old format (imageUrl) and new format (image)
-  const imageUrl = 'image' in activity ? activity.image : activity.imageUrl;
+  const imageUrl = "image" in activity ? activity.image : activity.imageUrl;
 
   return (
-    <Card>
+    <Card className="h-full flex flex-col">
       <CardHeader>
         <CardTitle>{activity.title}</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex-grow">
         <div className="min-h-md overflow-hidden rounded-md bg-gray-100">
           {imageUrl ? (
-            <img 
-              src={imageUrl} 
+            <img
+              src={imageUrl}
               alt={activity.title}
               className="w-full h-64 object-cover"
             />
