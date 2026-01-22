@@ -1,19 +1,26 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { HexButton } from "./ui/hex-button";
-import { List, Search, User } from "lucide-react";
+import { Search, User } from "lucide-react";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "./ui/input-group";
 
 export default function Header() {
+  const navigate = useNavigate();
+
+  const handleProfileClick = () => {
+    const loggedInUserId = localStorage.getItem("loggedInUserId");
+    if (loggedInUserId) {
+      navigate({ to: `/user/$id`, params: { id: loggedInUserId } });
+    } else {
+      navigate({ to: "/login" });
+    }
+  };
+
   return (
     <header className="p-4">
       <div className="flex items-center">
         <h1 className="ml-6 text-xl font-semibold text-foreground">
           <Link to="/">
-            <img
-              src="src\images\Logo.png"
-              alt="Logo"
-              className="h-16"
-            />
+            <img src="src\images\Logo.png" alt="Logo" className="h-16" />
           </Link>
         </h1>
         <h2 className="ml-10 text-[32px] text-foreground">Connectar</h2>
@@ -46,11 +53,11 @@ export default function Header() {
             </InputGroupAddon>
           </InputGroup>
           <div className="flex gap-12 text-secondary">
-            <Link to="/">
+            <button onClick={handleProfileClick}>
               <HexButton>
                 <User />
               </HexButton>
-            </Link>
+            </button>
             {/*<Link to="/">
               <HexButton>
                 <List />
