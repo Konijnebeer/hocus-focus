@@ -1,122 +1,389 @@
-import { useState } from 'react';
-import { MapPin } from 'lucide-react';
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { getActivity } from "@/database/activityDb";
+import { getUser } from "@/database/userDb";
+import {
+  getActivityParticipants,
+  addParticipant,
+  removeParticipant,
+  isUserParticipant,
+} from "@/database/participantDb";
+import type { Activity } from "@/database/activityDb";
+import type { User } from "@/database/userDb";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import {
+  Item,
+  ItemMedia,
+  ItemContent,
+  ItemTitle,
+  ItemDescription,
+  ItemGroup,
+  ItemSeparator,
+} from "@/components/ui/item";
+import { Badge } from "@/components/ui/badge";
+import {
+  Calendar,
+  Clock,
+  Timer,
+  Users,
+  MapPin,
+  Image,
+  User as UserIcon,
+  UserPlus,
+  UserMinus,
+} from "lucide-react";
 
-const ActivityDetailPage = () => {
-    const [activity] = useState({
-        id: '1',
-        title: 'Morning Yoga Session',
-        category: 'Wellness',
-        duration: '60 min',
-        numParticipants: 12,
-        dateTime: '2026-01-25 at 08:00',
-        description: 'Join us for a refreshing morning yoga session to start your day with energy and mindfulness. Suitable for all levels, from beginners to advanced practitioners.',
-        location: 'Central Park, New York',
-        imageUrl: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&q=80',
-        mapUrl: 'https://www.google.com/maps?q=Central+Park+New+York&output=embed'
-    });
+export const Route = createFileRoute("/activity/$id")({
+  component: RouteComponent,
+});
 
+function RouteComponent() {
+  const { id } = Route.useParams();
+  const [activity, setActivity] = useState<Activity | null>(null);
+  const [creator, setCreator] = useState<User | null>(null);
+  const [participants, setParticipants] = useState<User[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
+  const [isParticipant, setIsParticipant] = useState(false);
+  const [isJoining, setIsJoining] = useState(false);
+
+  // Get current logged-in user from localStorage
+  useEffect(() => {
+    const loggedInUserId = localStorage.getItem("loggedInUserId");
+    if (loggedInUserId) {
+      setCurrentUserId(loggedInUserId);
+    }
+  }, []);
+
+  // Load activity data
+  useEffect(() => {
+    async function loadActivityData() {
+      try {
+        setLoading(true);
+
+        // Get activity
+        const activityData = await getActivity(id);
+        if (!activityData) {
+          console.error("Activity not found");
+          setLoading(false);
+          return;
+        }
+        setActivity(activityData);
+
+        // Get creator
+        const creatorData = await getUser(activityData.creatorId);
+        setCreator(creatorData || null);
+
+        // Get participants
+        const participantRecords = await getActivityParticipants(id);
+        const participantUsers = await Promise.all(
+          participantRecords.map(async (p) => {
+            const user = await getUser(p.userId);
+            return user;
+          }),
+        );
+        setParticipants(
+          participantUsers.filter((u): u is User => u !== undefined),
+        );
+
+        // Check if current user is a participant
+        if (currentUserId) {
+          const isJoined = await isUserParticipant(currentUserId, id);
+          setIsParticipant(isJoined);
+        }
+
+        setLoading(false);
+      } catch (error) {
+        console.error("Error loading activity data:", error);
+        setLoading(false);
+      }
+    }
+
+    loadActivityData();
+  }, [id, currentUserId]);
+
+  const handleJoinLeave = async () => {
+    if (!currentUserId || !activity) return;
+
+    try {
+      setIsJoining(true);
+
+      if (isParticipant) {
+        // Leave activity
+        await removeParticipant(currentUserId, id);
+        setIsParticipant(false);
+
+        // Update participants list
+        setParticipants((prev) => prev.filter((p) => p.id !== currentUserId));
+      } else {
+        // Join activity
+        await addParticipant(currentUserId, id);
+        setIsParticipant(true);
+
+        // Update participants list
+        const currentUser = await getUser(currentUserId);
+        if (currentUser) {
+          setParticipants((prev) => [...prev, currentUser]);
+        }
+      }
+    } catch (error) {
+      console.error("Error joining/leaving activity:", error);
+    } finally {
+      setIsJoining(false);
+    }
+  };
+
+  if (loading) {
     return (
-        <main className="min-h-screen bg-gray-50 p-4 md:p-8">
-            <div className="max-w-6xl mx-auto bg-white rounded-lg shadow-sm overflow-hidden">
-                <div className="flex flex-col md:flex-row">
-                    {/* Image Section */}
-                    <div className="w-full md:w-1/3 bg-gray-200 relative">
-                        <div className="aspect-square md:aspect-auto md:h-full flex items-center justify-center">
-                            {activity.imageUrl ? (
-                                <img
-                                    src={activity.imageUrl}
-                                    alt={activity.title}
-                                    className="w-full h-full object-cover"
-                                />
-                            ) : (
-                                <div className="text-gray-400">
-                                    <svg
-                                        className="w-24 h-24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth={1.5}
-                                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                                        />
-                                    </svg>
-                                </div>
-                            )}
-                        </div>
-                    </div>
-
-                    {/* Details Section */}
-                    <div className="w-full md:w-2/3 p-6 md:p-8">
-                        <div className="flex flex-col h-full">
-                            {/* Header */}
-                            <div className="mb-6">
-                                <h1 className="text-3xl font-bold text-gray-900 mb-4">
-                                    {activity.title}
-                                </h1>
-
-                                {/* Tags */}
-                                <div className="flex flex-wrap gap-3 mb-3">
-                                    <span className="px-3 py-1 bg-gray-300 text-gray-700 rounded-full text-sm">
-                                        {activity.category}
-                                    </span>
-                                    <span className="px-3 py-1 bg-white border border-gray-300 text-gray-700 rounded text-sm">
-                                        {activity.duration}
-                                    </span>
-                                    <span className="px-3 py-1 bg-white border border-gray-300 text-gray-700 rounded text-sm">
-                                        {activity.numParticipants} participants
-                                    </span>
-                                </div>
-
-                                {/* Date/Time */}
-                                <div className="text-sm text-gray-500 mb-4">
-                                    {activity.dateTime}
-                                </div>
-
-                                {/* Description */}
-                                <p className="text-gray-700 leading-relaxed mb-6">
-                                    {activity.description}
-                                </p>
-
-                                {/* Location */}
-                                <div className="flex items-start gap-2 text-gray-600 mb-6">
-                                    <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0" />
-                                    <span className="text-sm">{activity.location}</span>
-                                </div>
-                            </div>
-
-                            {/* Map Section */}
-                            <div className="mt-auto">
-                                <div className="w-full h-48 bg-gray-200 rounded-lg flex items-center justify-center">
-                                    {activity.mapUrl ? (
-                                        <iframe
-                                            src={activity.mapUrl}
-                                            title={`Map for ${activity.title}`}
-                                            className="w-full h-full rounded-lg"
-                                            loading="lazy"
-                                        />
-                                    ) : (
-                                        <div className="text-gray-400">
-                                            <MapPin className="w-16 h-16" />
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-
-                            {/* Join Button */}
-                            <div className="mt-6 flex justify-end">
-                                <button className="px-8 py-2.5 bg-gray-900 text-white rounded-full hover:bg-gray-800 transition-colors font-medium">
-                                    Join
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <p className="text-muted-foreground">Loading activity...</p>
+      </div>
     );
-};
+  }
 
-export default ActivityDetailPage;
+  if (!activity) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Card className="max-w-md">
+          <CardHeader>
+            <CardTitle>Activity Not Found</CardTitle>
+            <CardDescription>
+              The activity you're looking for doesn't exist.
+            </CardDescription>
+          </CardHeader>
+        </Card>
+      </div>
+    );
+  }
+
+  const isCreator = currentUserId === activity.creatorId;
+  const canJoinLeave = currentUserId && !isCreator;
+
+  return (
+    <div className="min-h-screen bg-background">
+      <div className="container mx-auto px-4 py-8 max-w-5xl">
+        {/* Activity Header */}
+        <Card className="mb-6 bg-primary text-primary-foreground border-primary shadow-lg">
+          <CardHeader className="pb-4">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+              <div>
+                <CardTitle className="text-3xl font-bold mb-2">
+                  {activity.title}
+                </CardTitle>
+                <Badge variant="secondary" className="text-sm">
+                  {activity.category}
+                </Badge>
+              </div>
+              {canJoinLeave && (
+                <Button
+                  onClick={handleJoinLeave}
+                  disabled={isJoining}
+                  variant="secondary"
+                  size="lg"
+                  className="flex items-center gap-2"
+                >
+                  {isParticipant ? (
+                    <>
+                      <UserMinus className="w-5 h-5" />
+                      Leave Activity
+                    </>
+                  ) : (
+                    <>
+                      <UserPlus className="w-5 h-5" />
+                      Join Activity
+                    </>
+                  )}
+                </Button>
+              )}
+            </div>
+          </CardHeader>
+        </Card>
+
+        {/* Activity Image */}
+        <Card className="mb-6 overflow-hidden bg-primary border-primary">
+          <CardContent className="p-0">
+            <div className="relative h-96 bg-gradient-to-br from-primary/20 to-primary/40">
+              {activity.image ? (
+                <img
+                  src={activity.image}
+                  alt={activity.title}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center">
+                  <Image className="w-16 h-16 text-primary-foreground/50" />
+                </div>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Activity Details */}
+        <Card className="mb-6 bg-primary text-primary-foreground border-primary">
+          <CardHeader>
+            <CardTitle className="text-xl">Activity Details</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="flex items-center gap-3">
+                <Calendar className="w-5 h-5" />
+                <div>
+                  <p className="text-sm text-primary-foreground/70">Date</p>
+                  <p className="font-medium">{activity.date}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <Clock className="w-5 h-5" />
+                <div>
+                  <p className="text-sm text-primary-foreground/70">Time</p>
+                  <p className="font-medium">{activity.hour}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <Timer className="w-5 h-5" />
+                <div>
+                  <p className="text-sm text-primary-foreground/70">Duration</p>
+                  <p className="font-medium">{activity.duration} minutes</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <MapPin className="w-5 h-5" />
+                <div>
+                  <p className="text-sm text-primary-foreground/70">Location</p>
+                  <p className="font-medium">{activity.location}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <Users className="w-5 h-5" />
+                <div>
+                  <p className="text-sm text-primary-foreground/70">
+                    Participants
+                  </p>
+                  <p className="font-medium">
+                    {participants.length} / {activity.numParticipants}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Activity Description */}
+        <Card className="mb-6 bg-primary text-primary-foreground border-primary">
+          <CardHeader>
+            <CardTitle className="text-xl">Description</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-primary-foreground/90 leading-relaxed">
+              {activity.description}
+            </p>
+          </CardContent>
+        </Card>
+
+        {/* Activity Creator */}
+        {creator && (
+          <Card className="mb-6 bg-primary text-primary-foreground border-primary">
+            <CardHeader>
+              <CardTitle className="text-xl">Organized By</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Link to="/user/$id" params={{ id: creator.id }}>
+                <Item
+                  variant="muted"
+                  className="bg-primary/50 hover:bg-primary/70 cursor-pointer border-primary-foreground/20"
+                >
+                  <ItemMedia variant="image">
+                    {creator.picture ? (
+                      <img
+                        src={creator.picture}
+                        alt={creator.name}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-primary-foreground/10">
+                        <UserIcon className="w-6 h-6 text-primary-foreground" />
+                      </div>
+                    )}
+                  </ItemMedia>
+                  <ItemContent>
+                    <ItemTitle className="text-primary-foreground">
+                      {creator.name} {creator.surname}
+                    </ItemTitle>
+                    {creator.role && (
+                      <ItemDescription className="text-primary-foreground/70">
+                        {creator.role}
+                      </ItemDescription>
+                    )}
+                  </ItemContent>
+                </Item>
+              </Link>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Participants List */}
+        {participants.length > 0 && (
+          <Card className="bg-primary text-primary-foreground border-primary">
+            <CardHeader>
+              <CardTitle className="text-xl">
+                Participants ({participants.length})
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ItemGroup>
+                {participants.map((participant, index) => (
+                  <div key={participant.id}>
+                    {index > 0 && (
+                      <ItemSeparator className="bg-primary-foreground/20 my-3" />
+                    )}
+                    <Link
+                      to="/user/$id"
+                      params={{ id: participant.id }}
+                      className="block"
+                    >
+                      <Item
+                        variant="muted"
+                        className="bg-primary/50 hover:bg-primary/70 cursor-pointer border-primary-foreground/20"
+                      >
+                        <ItemMedia variant="image">
+                          {participant.picture ? (
+                            <img
+                              src={participant.picture}
+                              alt={participant.name}
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center bg-primary-foreground/10">
+                              <UserIcon className="w-6 h-6 text-primary-foreground" />
+                            </div>
+                          )}
+                        </ItemMedia>
+                        <ItemContent>
+                          <ItemTitle className="text-primary-foreground">
+                            {participant.name} {participant.surname}
+                          </ItemTitle>
+                          {participant.role && (
+                            <ItemDescription className="text-primary-foreground/70">
+                              {participant.role}
+                            </ItemDescription>
+                          )}
+                        </ItemContent>
+                      </Item>
+                    </Link>
+                  </div>
+                ))}
+              </ItemGroup>
+            </CardContent>
+          </Card>
+        )}
+      </div>
+    </div>
+  );
+}

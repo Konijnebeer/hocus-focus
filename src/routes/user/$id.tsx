@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { getUser, seedUsers } from "@/database/userDb";
 import { getActivitiesByCreator, getActivity } from "@/database/activityDb";
@@ -9,7 +9,20 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
-import { MapPin, Calendar, Timer, Users } from "lucide-react";
+import {
+  Item,
+  ItemMedia,
+  ItemContent,
+  ItemTitle,
+  ItemDescription,
+} from "@/components/ui/item";
+import {
+  MapPin,
+  Calendar,
+  Timer,
+  Users,
+  Image as ImageIcon,
+} from "lucide-react";
 
 export const Route = createFileRoute("/user/$id")({
   component: RouteComponent,
@@ -154,66 +167,68 @@ function RouteComponent() {
                 </p>
               ) : (
                 <ScrollArea className="h-[400px] pr-4">
-                  <div className="space-y-4">
+                  <div className="space-y-3">
                     {joinedActivities.map((activity) => (
-                      <Card key={activity.id} className="bg-white">
-                        <CardContent className="pt-4">
-                          <div className="flex items-start gap-4">
-                            {activity.image && (
-                              <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 bg-muted">
-                                <img
-                                  src={activity.image}
-                                  alt={activity.title}
-                                  className="w-full h-full object-cover"
-                                />
+                      <Link
+                        key={activity.id}
+                        to="/activity/$id"
+                        params={{ id: activity.id }}
+                        className="block"
+                      >
+                        <Item
+                          variant="outline"
+                          className="cursor-pointer hover:bg-accent/50"
+                        >
+                          <ItemMedia variant="image">
+                            {activity.image ? (
+                              <img
+                                src={activity.image}
+                                alt={activity.title}
+                                className="w-full h-full object-cover"
+                              />
+                            ) : (
+                              <div className="w-full h-full flex items-center justify-center bg-muted">
+                                <ImageIcon className="w-5 h-5 text-muted-foreground" />
                               </div>
                             )}
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-start justify-between gap-2 mb-2">
-                                <h3 className="font-semibold text-base line-clamp-1 text-[#461220]">
-                                  {activity.title}
-                                </h3>
-                                <Badge
-                                  variant={
-                                    activity.status === "active"
-                                      ? "default"
-                                      : activity.status === "completed"
-                                        ? "secondary"
-                                        : "destructive"
-                                  }
-                                  className="flex-shrink-0"
-                                >
-                                  {activity.status}
-                                </Badge>
-                              </div>
-                              <p className="text-sm text-muted-foreground line-clamp-2 mb-2">
-                                {activity.description}
-                              </p>
-                              <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
-                                <span className="inline-flex items-center gap-1">
-                                  <MapPin className="w-3 h-3" />{" "}
-                                  {activity.location}
-                                </span>
-                                <span>•</span>
-                                <span className="inline-flex items-center gap-1">
-                                  <Calendar className="w-3 h-3" />{" "}
-                                  {activity.date}
-                                </span>
-                                <span>•</span>
-                                <span className="inline-flex items-center gap-1">
-                                  <Timer className="w-3 h-3" />{" "}
-                                  {activity.duration} min
-                                </span>
-                                <span>•</span>
-                                <span className="inline-flex items-center gap-1">
-                                  <Users className="w-3 h-3" />{" "}
-                                  {activity.numParticipants} participants
-                                </span>
-                              </div>
+                          </ItemMedia>
+                          <ItemContent>
+                            <div className="flex items-start justify-between gap-2">
+                              <ItemTitle>{activity.title}</ItemTitle>
+                              <Badge
+                                variant={
+                                  activity.status === "active"
+                                    ? "default"
+                                    : activity.status === "completed"
+                                      ? "secondary"
+                                      : "destructive"
+                                }
+                                className="flex-shrink-0"
+                              >
+                                {activity.status}
+                              </Badge>
                             </div>
-                          </div>
-                        </CardContent>
-                      </Card>
+                            <ItemDescription className="line-clamp-1">
+                              {activity.description}
+                            </ItemDescription>
+                            <div className="flex flex-wrap gap-2 text-xs text-muted-foreground mt-1">
+                              <span className="inline-flex items-center gap-1">
+                                <MapPin className="w-3 h-3" />{" "}
+                                {activity.location}
+                              </span>
+                              <span>•</span>
+                              <span className="inline-flex items-center gap-1">
+                                <Calendar className="w-3 h-3" /> {activity.date}
+                              </span>
+                              <span>•</span>
+                              <span className="inline-flex items-center gap-1">
+                                <Timer className="w-3 h-3" />{" "}
+                                {activity.duration} min
+                              </span>
+                            </div>
+                          </ItemContent>
+                        </Item>
+                      </Link>
                     ))}
                   </div>
                 </ScrollArea>
@@ -233,66 +248,68 @@ function RouteComponent() {
                 </p>
               ) : (
                 <ScrollArea className="h-[400px] pr-4">
-                  <div className="space-y-4">
+                  <div className="space-y-3">
                     {activities.map((activity) => (
-                      <Card key={activity.id} className="bg-white">
-                        <CardContent className="pt-4">
-                          <div className="flex items-start gap-4">
-                            {activity.image && (
-                              <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 bg-muted">
-                                <img
-                                  src={activity.image}
-                                  alt={activity.title}
-                                  className="w-full h-full object-cover"
-                                />
+                      <Link
+                        key={activity.id}
+                        to="/activity/$id"
+                        params={{ id: activity.id }}
+                        className="block"
+                      >
+                        <Item
+                          variant="outline"
+                          className="cursor-pointer hover:bg-accent/50"
+                        >
+                          <ItemMedia variant="image">
+                            {activity.image ? (
+                              <img
+                                src={activity.image}
+                                alt={activity.title}
+                                className="w-full h-full object-cover"
+                              />
+                            ) : (
+                              <div className="w-full h-full flex items-center justify-center bg-muted">
+                                <ImageIcon className="w-5 h-5 text-muted-foreground" />
                               </div>
                             )}
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-start justify-between gap-2 mb-2">
-                                <h3 className="font-semibold text-base line-clamp-1 text-[#461220]">
-                                  {activity.title}
-                                </h3>
-                                <Badge
-                                  variant={
-                                    activity.status === "active"
-                                      ? "default"
-                                      : activity.status === "completed"
-                                        ? "secondary"
-                                        : "destructive"
-                                  }
-                                  className="flex-shrink-0"
-                                >
-                                  {activity.status}
-                                </Badge>
-                              </div>
-                              <p className="text-sm text-muted-foreground line-clamp-2 mb-2">
-                                {activity.description}
-                              </p>
-                              <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
-                                <span className="inline-flex items-center gap-1">
-                                  <MapPin className="w-3 h-3" />{" "}
-                                  {activity.location}
-                                </span>
-                                <span>•</span>
-                                <span className="inline-flex items-center gap-1">
-                                  <Calendar className="w-3 h-3" />{" "}
-                                  {activity.date}
-                                </span>
-                                <span>•</span>
-                                <span className="inline-flex items-center gap-1">
-                                  <Timer className="w-3 h-3" />{" "}
-                                  {activity.duration} min
-                                </span>
-                                <span>•</span>
-                                <span className="inline-flex items-center gap-1">
-                                  <Users className="w-3 h-3" />{" "}
-                                  {activity.numParticipants} participants
-                                </span>
-                              </div>
+                          </ItemMedia>
+                          <ItemContent>
+                            <div className="flex items-start justify-between gap-2">
+                              <ItemTitle>{activity.title}</ItemTitle>
+                              <Badge
+                                variant={
+                                  activity.status === "active"
+                                    ? "default"
+                                    : activity.status === "completed"
+                                      ? "secondary"
+                                      : "destructive"
+                                }
+                                className="flex-shrink-0"
+                              >
+                                {activity.status}
+                              </Badge>
                             </div>
-                          </div>
-                        </CardContent>
-                      </Card>
+                            <ItemDescription className="line-clamp-1">
+                              {activity.description}
+                            </ItemDescription>
+                            <div className="flex flex-wrap gap-2 text-xs text-muted-foreground mt-1">
+                              <span className="inline-flex items-center gap-1">
+                                <MapPin className="w-3 h-3" />{" "}
+                                {activity.location}
+                              </span>
+                              <span>•</span>
+                              <span className="inline-flex items-center gap-1">
+                                <Calendar className="w-3 h-3" /> {activity.date}
+                              </span>
+                              <span>•</span>
+                              <span className="inline-flex items-center gap-1">
+                                <Timer className="w-3 h-3" />{" "}
+                                {activity.duration} min
+                              </span>
+                            </div>
+                          </ItemContent>
+                        </Item>
+                      </Link>
                     ))}
                   </div>
                 </ScrollArea>

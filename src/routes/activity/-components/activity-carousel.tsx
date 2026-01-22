@@ -9,6 +9,7 @@ import {
 import ActivityCard from "@/components/activity-card";
 import type { Activity } from "@/database/activityDb";
 import React from "react";
+import { Link } from "@tanstack/react-router";
 
 type ActivityCarouselProps = {
   activities: Activity[];
@@ -48,11 +49,13 @@ export function ActivityCarousel({
               key={index}
               className="pl-4 md:basis-1/2 lg:basis-1/3"
             >
-              <div
-                className={`h-full transition-opacity duration-300 ${activities.length <= 3 ? "opacity-100" : index === currentIndex ? "opacity-100" : "opacity-30"}`}
-              >
-                <ActivityCard activity={activity} />
-              </div>
+              <Link to="/activity/$id" params={{ id: activity.id }}>
+                <div
+                  className={`h-full transition-opacity duration-300 cursor-pointer ${activities.length <= 3 ? "opacity-100" : index === currentIndex ? "opacity-100" : "opacity-30"}`}
+                >
+                  <ActivityCard activity={activity} />
+                </div>
+              </Link>
             </CarouselItem>
           ))}
         </CarouselContent>
