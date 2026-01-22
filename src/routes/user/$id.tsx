@@ -20,7 +20,6 @@ import {
   MapPin,
   Calendar,
   Timer,
-  Users,
   Image as ImageIcon,
 } from "lucide-react";
 
@@ -125,7 +124,7 @@ function RouteComponent() {
                   {user.role}
                 </Badge>
               )}
-              <p className="text-sm text-muted-foreground">{user.email}</p>
+              <p className="text-sm text-secondary">{user.email}</p>
               {isOwnProfile && (
                 <Button
                   variant="secondary"
@@ -162,7 +161,7 @@ function RouteComponent() {
             </CardHeader>
             <CardContent>
               {joinedActivities.length === 0 ? (
-                <p className="text-muted-foreground text-center py-4">
+                <p className="text-secondary text-center py-4">
                   No activities joined yet.
                 </p>
               ) : (
@@ -188,7 +187,7 @@ function RouteComponent() {
                               />
                             ) : (
                               <div className="w-full h-full flex items-center justify-center bg-muted">
-                                <ImageIcon className="w-5 h-5 text-muted-foreground" />
+                                <ImageIcon className="w-5 h-5 text-secondary" />
                               </div>
                             )}
                           </ItemMedia>
@@ -208,10 +207,10 @@ function RouteComponent() {
                                 {activity.status}
                               </Badge>
                             </div>
-                            <ItemDescription className="line-clamp-1">
+                            <ItemDescription className="line-clamp-1 text-secondary">
                               {activity.description}
                             </ItemDescription>
-                            <div className="flex flex-wrap gap-2 text-xs text-muted-foreground mt-1">
+                            <div className="flex flex-wrap gap-2 text-xs text-secondary mt-1">
                               <span className="inline-flex items-center gap-1">
                                 <MapPin className="w-3 h-3" />{" "}
                                 {activity.location}
@@ -243,7 +242,7 @@ function RouteComponent() {
             </CardHeader>
             <CardContent>
               {activities.length === 0 ? (
-                <p className="text-muted-foreground text-center py-4">
+                <p className="text-secondary text-center py-4">
                   No activities created yet.
                 </p>
               ) : (
@@ -269,7 +268,7 @@ function RouteComponent() {
                               />
                             ) : (
                               <div className="w-full h-full flex items-center justify-center bg-muted">
-                                <ImageIcon className="w-5 h-5 text-muted-foreground" />
+                                <ImageIcon className="w-5 h-5 text-secondary" />
                               </div>
                             )}
                           </ItemMedia>
@@ -289,10 +288,10 @@ function RouteComponent() {
                                 {activity.status}
                               </Badge>
                             </div>
-                            <ItemDescription className="line-clamp-1">
+                            <ItemDescription className="line-clamp-1 text-secondary">
                               {activity.description}
                             </ItemDescription>
-                            <div className="flex flex-wrap gap-2 text-xs text-muted-foreground mt-1">
+                            <div className="flex flex-wrap gap-2 text-xs text-secondary mt-1">
                               <span className="inline-flex items-center gap-1">
                                 <MapPin className="w-3 h-3" />{" "}
                                 {activity.location}

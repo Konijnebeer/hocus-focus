@@ -63,7 +63,7 @@ function RouteComponent() {
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl">Welcome Back</CardTitle>
-          <CardDescription>Sign in to your account</CardDescription>
+          <CardDescription className="text-secondary">Sign in to your account</CardDescription>
         </CardHeader>
         <CardContent>
           <form
@@ -132,14 +132,14 @@ function RouteComponent() {
               Sign In
             </Button>
           </form>
-          <div className="mt-4 text-center text-sm text-muted-foreground">
+          <div className="mt-4 text-center text-sm text-secondary">
             <p>Test accounts:</p>
             <p>emma.virtanen@email.com / password123</p>
             <p className="mt-2">
               Don't have an account?{" "}
               <a
                 href="/signup"
-                className="text-primary hover:underline underline-offset-4"
+                className="text-white hover:underline underline-offset-4"
               >
                 Sign up
               </a>
