@@ -6,30 +6,31 @@ export const Route = createFileRoute("/")({
 });
 
 function App() {
-
-    const imageUrl = "image"
-    return <div className="min-h-md overflow-hidden rounded-md bg-gray-100 text-center h-screen m-8">
-        {imageUrl ? (
-            <img
-                src={imageUrl}
-                alt="Stock Image"
-                className="w-full h-64 object-cover"
-            />
-        ) : (
-            <div className="w-full h-64 flex items-center justify-center text-gray-400">
-                No image available
+    const imageUrl = "public/images/yoga-2.jpg";
+    return (
+        <div 
+            className="min-h-screen overflow-hidden rounded-md text-center m-8 flex flex-col items-center justify-center"
+            style={{
+                backgroundImage: `url(${imageUrl})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundAttachment: "fixed",
+                backgroundRepeat: "no-repeat",
+                height: "80vh",
+                borderRadius: "1rem" // Added border radius for rounded edges
+            }}
+        >
+            <div className="p-8 rounded-lg w-2/3">
+                <p className="text-4xl font-bold m-4 text-white">Find low-pressure well-being activities near you, and connect with other women in Lahti</p>
+                <div className="flex justify-center gap-8 text-xl p-4">
+                    <Link to="/activity" className="bg-gray-300 rounded-full px-5 py-2 transition hover:bg-gray-200">
+                        Explore
+                    </Link>
+                    <Link to="/" className="bg-gray-300 rounded-full px-5 py-2 transition hover:bg-gray-200">
+                        Community
+                    </Link>
+                </div>
             </div>
-        )}
-        <p className="text-3xl m-4">At vero eos et accusamus.
-            et iusto odio dignissimos ducimus qui blanditiis.</p>
-        <div className="flex justify-center gap-8 text-xl p-4">
-            <Link to="/activity" className="bg-gray-300 rounded-full px-5 py-2 transition hover:bg-gray-200">
-                Explore
-            </Link>
-            <Link to="/" className="bg-gray-300 rounded-full px-5 py-2 transition hover:bg-gray-200">
-                Community
-            </Link>
         </div>
-
-    </div>;
+    );
 }
