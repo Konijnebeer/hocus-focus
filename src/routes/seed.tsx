@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { seedUsers, getUserCount } from "@/database/userDb";
-import { seedActivities, getActivityCount } from "@/database/activityDb";
+import { seedUsers, getUserCount, resetUsers } from "@/database/userDb";
+import { seedActivities, getActivityCount, resetActivities } from "@/database/activityDb";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -37,7 +37,7 @@ function RouteComponent() {
       setUserStatus("seeding");
       setUserMessage("Seeding users...");
 
-      await seedUsers();
+      await resetUsers();
 
       const count = await getUserCount();
       setUserCount(count);
@@ -56,7 +56,7 @@ function RouteComponent() {
       setActivityStatus("seeding");
       setActivityMessage("Seeding activities...");
 
-      await seedActivities();
+      await resetActivities();
 
       const count = await getActivityCount();
       setActivityCount(count);
