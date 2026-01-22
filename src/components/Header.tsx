@@ -20,7 +20,7 @@ export default function Header() {
           <ul className="flex space-x-6 ml-10">
             <li>
               <Link to="/activity" className="hover:underline">
-                Activitys
+                Activities
               </Link>
             </li>
             <li>
