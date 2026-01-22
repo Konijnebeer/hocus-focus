@@ -6,25 +6,40 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
+import type { Activity } from "@/database/activityDb";
 
 // ActivityCard component Data
 export type ActivityCardProps = {
-  activity: {
+  activity: Activity | {
     title: string;
     description: string;
-    imageUrl: string;
+    image?: string;
+    imageUrl?: string;
   };
 };
 
 export default function ActivityCard({ activity }: ActivityCardProps) {
+  // Handle both old format (imageUrl) and new format (image)
+  const imageUrl = 'image' in activity ? activity.image : activity.imageUrl;
+
   return (
     <Card>
       <CardHeader>
         <CardTitle>{activity.title}</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="min-h-md">
-          <img src={activity.imageUrl} alt={activity.title} />
+        <div className="min-h-md overflow-hidden rounded-md bg-gray-100">
+          {imageUrl ? (
+            <img 
+              src={imageUrl} 
+              alt={activity.title}
+              className="w-full h-64 object-cover"
+            />
+          ) : (
+            <div className="w-full h-64 flex items-center justify-center text-gray-400">
+              No image available
+            </div>
+          )}
         </div>
       </CardContent>
       <CardFooter>
