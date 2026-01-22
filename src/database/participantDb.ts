@@ -201,11 +201,16 @@ export async function seedParticipants(): Promise<void> {
     }
 
     const initialParticipants: Participant[] = [
-      // User-1 (Emma) participates in activities
+      // User-1 (Sanna) - creator of yoga-1, yoga-6
       {
         userId: "user-1",
-        activityId: "yoga-1",
+        activityId: "yoga-2",
         joinedAt: Math.floor(Date.now() / 1000) - 86400 * 5,
+      },
+      {
+        userId: "user-1",
+        activityId: "pilates-1",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400 * 4,
       },
       {
         userId: "user-1",
@@ -214,14 +219,24 @@ export async function seedParticipants(): Promise<void> {
       },
       {
         userId: "user-1",
-        activityId: "pilates-1",
+        activityId: "pilates-3",
         joinedAt: Math.floor(Date.now() / 1000) - 86400 * 2,
       },
 
-      // User-2 (Mikko) participates in activities
+      // User-2 (Mia) - creator of yoga-2, yoga-4
       {
         userId: "user-2",
-        activityId: "yoga-4",
+        activityId: "yoga-1",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400 * 6,
+      },
+      {
+        userId: "user-2",
+        activityId: "yoga-3",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400 * 5,
+      },
+      {
+        userId: "user-2",
+        activityId: "pilates-2",
         joinedAt: Math.floor(Date.now() / 1000) - 86400 * 4,
       },
       {
@@ -229,26 +244,205 @@ export async function seedParticipants(): Promise<void> {
         activityId: "hiking-2",
         joinedAt: Math.floor(Date.now() / 1000) - 86400 * 2,
       },
-      {
-        userId: "user-2",
-        activityId: "pilates-2",
-        joinedAt: Math.floor(Date.now() / 1000) - 86400,
-      },
 
-      // User-3 (Aino) participates in activities
+      // User-3 (Aino) - creator of hiking-1, hiking-3
+      {
+        userId: "user-3",
+        activityId: "yoga-1",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400 * 5,
+      },
       {
         userId: "user-3",
         activityId: "yoga-5",
-        joinedAt: Math.floor(Date.now() / 1000) - 86400 * 6,
-      },
-      {
-        userId: "user-3",
-        activityId: "hiking-1",
         joinedAt: Math.floor(Date.now() / 1000) - 86400 * 4,
       },
       {
         userId: "user-3",
+        activityId: "pilates-1",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400 * 3,
+      },
+      {
+        userId: "user-3",
+        activityId: "pilates-4",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400 * 2,
+      },
+
+      // User-4 (Katri) - no activities created
+      {
+        userId: "user-4",
+        activityId: "yoga-2",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400 * 4,
+      },
+      {
+        userId: "user-4",
+        activityId: "pilates-1",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400 * 3,
+      },
+      {
+        userId: "user-4",
         activityId: "pilates-3",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400 * 2,
+      },
+      {
+        userId: "user-4",
+        activityId: "hiking-1",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400,
+      },
+
+      // User-5 (Laura) - creator of pilates-2, pilates-5
+      {
+        userId: "user-5",
+        activityId: "yoga-3",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400 * 5,
+      },
+      {
+        userId: "user-5",
+        activityId: "yoga-7",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400 * 4,
+      },
+      {
+        userId: "user-5",
+        activityId: "hiking-2",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400 * 3,
+      },
+      {
+        userId: "user-5",
+        activityId: "pilates-1",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400 * 2,
+      },
+
+      // User-6 (Emilia) - no activities created
+      {
+        userId: "user-6",
+        activityId: "yoga-1",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400 * 6,
+      },
+      {
+        userId: "user-6",
+        activityId: "yoga-4",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400 * 5,
+      },
+      {
+        userId: "user-6",
+        activityId: "pilates-2",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400 * 3,
+      },
+      {
+        userId: "user-6",
+        activityId: "hiking-3",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400 * 2,
+      },
+
+      // User-7 (Hanna) - creator of pilates-1, pilates-3
+      {
+        userId: "user-7",
+        activityId: "yoga-2",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400 * 4,
+      },
+      {
+        userId: "user-7",
+        activityId: "yoga-6",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400 * 3,
+      },
+      {
+        userId: "user-7",
+        activityId: "hiking-1",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400 * 2,
+      },
+      {
+        userId: "user-7",
+        activityId: "pilates-5",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400,
+      },
+
+      // User-8 (Sofia) - creator of hiking-2
+      {
+        userId: "user-8",
+        activityId: "yoga-3",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400 * 5,
+      },
+      {
+        userId: "user-8",
+        activityId: "yoga-5",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400 * 4,
+      },
+      {
+        userId: "user-8",
+        activityId: "hiking-1",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400 * 3,
+      },
+      {
+        userId: "user-8",
+        activityId: "pilates-2",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400 * 2,
+      },
+
+      // User-9 (Elina) - creator of yoga-3, yoga-7
+      {
+        userId: "user-9",
+        activityId: "yoga-1",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400 * 6,
+      },
+      {
+        userId: "user-9",
+        activityId: "yoga-5",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400 * 5,
+      },
+      {
+        userId: "user-9",
+        activityId: "hiking-3",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400 * 3,
+      },
+      {
+        userId: "user-9",
+        activityId: "pilates-4",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400 * 2,
+      },
+
+      // Additional cross-participation
+      {
+        userId: "user-1",
+        activityId: "yoga-3",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400,
+      },
+      {
+        userId: "user-2",
+        activityId: "hiking-3",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400,
+      },
+      {
+        userId: "user-3",
+        activityId: "yoga-7",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400,
+      },
+      {
+        userId: "user-4",
+        activityId: "yoga-5",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400,
+      },
+      {
+        userId: "user-5",
+        activityId: "hiking-1",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400,
+      },
+      {
+        userId: "user-6",
+        activityId: "pilates-4",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400,
+      },
+      {
+        userId: "user-7",
+        activityId: "yoga-4",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400,
+      },
+      {
+        userId: "user-8",
+        activityId: "pilates-3",
+        joinedAt: Math.floor(Date.now() / 1000) - 86400,
+      },
+      {
+        userId: "user-9",
+        activityId: "pilates-2",
         joinedAt: Math.floor(Date.now() / 1000) - 86400,
       },
     ];
