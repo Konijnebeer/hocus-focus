@@ -2,6 +2,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { getUserCount, resetUsers } from "@/database/userDb";
 import { getActivityCount, resetActivities } from "@/database/activityDb";
+import {
+  getParticipantCount,
+  resetParticipants,
+} from "@/database/participantDb";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -17,10 +21,15 @@ function RouteComponent() {
   const [activityStatus, setActivityStatus] = useState<
     "idle" | "seeding" | "success" | "error"
   >("idle");
+  const [participantStatus, setParticipantStatus] = useState<
+    "idle" | "seeding" | "success" | "error"
+  >("idle");
   const [userMessage, setUserMessage] = useState("");
   const [activityMessage, setActivityMessage] = useState("");
+  const [participantMessage, setParticipantMessage] = useState("");
   const [userCount, setUserCount] = useState<number | null>(null);
   const [activityCount, setActivityCount] = useState<number | null>(null);
+  const [participantCount, setParticipantCount] = useState<number | null>(null);
 
   useEffect(() => {
     // Check current counts on mount
@@ -30,6 +39,9 @@ function RouteComponent() {
     getActivityCount()
       .then(setActivityCount)
       .catch(() => setActivityCount(null));
+    getParticipantCount()
+      .then(setParticipantCount)
+      .catch(() => setParticipantCount(null));
   }, []);
 
   const handleSeedUsers = async () => {
@@ -72,9 +84,31 @@ function RouteComponent() {
     }
   };
 
+  const handleSeedParticipants = async () => {
+    try {
+      setParticipantStatus("seeding");
+      setParticipantMessage("Seeding participants...");
+
+      await resetParticipants();
+
+      const count = await getParticipantCount();
+      setParticipantCount(count);
+      setParticipantStatus("success");
+      setParticipantMessage(
+        `Successfully seeded participants! Total participants: ${count}`,
+      );
+    } catch (error) {
+      setParticipantStatus("error");
+      setParticipantMessage(
+        `Error seeding participants: ${error instanceof Error ? error.message : "Unknown error"}`,
+      );
+    }
+  };
+
   const handleSeedAll = async () => {
     await handleSeedUsers();
     await handleSeedActivities();
+    await handleSeedParticipants();
   };
 
   return (
@@ -87,17 +121,21 @@ function RouteComponent() {
           {/* Seed All Button */}
           <div className="space-y-2">
             <p className="text-muted-foreground">
-              Seed both users and activities at once.
+              Seed users, activities, and participants at once.
             </p>
             <Button
               onClick={handleSeedAll}
               disabled={
-                userStatus === "seeding" || activityStatus === "seeding"
+                userStatus === "seeding" ||
+                activityStatus === "seeding" ||
+                participantStatus === "seeding"
               }
               className="w-full"
               variant="default"
             >
-              {userStatus === "seeding" || activityStatus === "seeding"
+              {userStatus === "seeding" ||
+              activityStatus === "seeding" ||
+              participantStatus === "seeding"
                 ? "Seeding..."
                 : "Seed All"}
             </Button>
@@ -179,6 +217,48 @@ function RouteComponent() {
                 }`}
               >
                 {activityMessage}
+              </div>
+            )}
+          </div>
+
+          <Separator />
+
+          {/* Participants Section */}
+          <div className="space-y-4">
+            <h3 className="font-semibold">Participants</h3>
+            <div className="space-y-2">
+              <p className="text-muted-foreground text-sm">
+                Seed the participant database with initial data if it's empty.
+              </p>
+              {participantCount !== null && (
+                <p className="text-sm">
+                  Current participant count: <strong>{participantCount}</strong>
+                </p>
+              )}
+            </div>
+
+            <Button
+              onClick={handleSeedParticipants}
+              disabled={participantStatus === "seeding"}
+              className="w-full"
+              variant="secondary"
+            >
+              {participantStatus === "seeding"
+                ? "Seeding..."
+                : "Seed Participants"}
+            </Button>
+
+            {participantMessage && (
+              <div
+                className={`p-4 rounded-lg ${
+                  participantStatus === "success"
+                    ? "bg-green-500/10 text-green-700 dark:text-green-400"
+                    : participantStatus === "error"
+                      ? "bg-red-500/10 text-red-700 dark:text-red-400"
+                      : "bg-blue-500/10 text-blue-700 dark:text-blue-400"
+                }`}
+              >
+                {participantMessage}
               </div>
             )}
           </div>

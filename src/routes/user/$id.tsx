@@ -1,7 +1,8 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { getUser, seedUsers } from "@/database/userDb";
-import { getActivitiesByCreator } from "@/database/activityDb";
+import { getActivitiesByCreator, getActivity } from "@/database/activityDb";
+import { getUserActivities } from "@/database/participantDb";
 import type { User } from "@/database/userDb";
 import type { Activity } from "@/database/activityDb";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -18,6 +19,7 @@ function RouteComponent() {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
   const [activities, setActivities] = useState<Activity[]>([]);
+  const [joinedActivities, setJoinedActivities] = useState<Activity[]>([]);
   const [loading, setLoading] = useState(true);
   const [isOwnProfile, setIsOwnProfile] = useState(false);
 
@@ -32,6 +34,18 @@ function RouteComponent() {
           setUser(userData);
           const userActivities = await getActivitiesByCreator(id);
           setActivities(userActivities);
+
+          // Get activities the user has joined
+          const participations = await getUserActivities(id);
+          const joined = await Promise.all(
+            participations.map(async (p) => {
+              const activity = await getActivity(p.activityId);
+              return activity;
+            }),
+          );
+          setJoinedActivities(
+            joined.filter((a): a is Activity => a !== undefined),
+          );
 
           // Check if this is the logged-in user's profile
           const loggedInUserId = localStorage.getItem("loggedInUserId");
@@ -69,7 +83,7 @@ function RouteComponent() {
   }
 
   return (
-    <main className="h-[70vh] container mx-auto p-6 max-w-6xl">
+    <main className="min-h-[70vh] h-fit container mx-auto p-6 max-w-6xl">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Left Side - Profile Info */}
         <div className="md:col-span-1">
@@ -125,7 +139,78 @@ function RouteComponent() {
             </CardContent>
           </Card>
 
-          {/* Activities Section */}
+          {/* Joined Activities Section */}
+          <Card>
+            <CardHeader>
+              <CardTitle>
+                Joined Activities ({joinedActivities.length})
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              {joinedActivities.length === 0 ? (
+                <p className="text-muted-foreground text-center py-4">
+                  No activities joined yet.
+                </p>
+              ) : (
+                <ScrollArea className="h-[400px] pr-4">
+                  <div className="space-y-4">
+                    {joinedActivities.map((activity) => (
+                      <Card key={activity.id}>
+                        <CardContent className="pt-4">
+                          <div className="flex items-start gap-4">
+                            {activity.image && (
+                              <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 bg-muted">
+                                <img
+                                  src={activity.image}
+                                  alt={activity.title}
+                                  className="w-full h-full object-cover"
+                                />
+                              </div>
+                            )}
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-start justify-between gap-2 mb-2">
+                                <h3 className="font-semibold text-base line-clamp-1">
+                                  {activity.title}
+                                </h3>
+                                <Badge
+                                  variant={
+                                    activity.status === "active"
+                                      ? "default"
+                                      : activity.status === "completed"
+                                        ? "secondary"
+                                        : "destructive"
+                                  }
+                                  className="flex-shrink-0"
+                                >
+                                  {activity.status}
+                                </Badge>
+                              </div>
+                              <p className="text-sm text-muted-foreground line-clamp-2 mb-2">
+                                {activity.description}
+                              </p>
+                              <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
+                                <span>📍 {activity.location}</span>
+                                <span>•</span>
+                                <span>📅 {activity.date}</span>
+                                <span>•</span>
+                                <span>⏱️ {activity.duration} min</span>
+                                <span>•</span>
+                                <span>
+                                  👥 {activity.numParticipants} participants
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </ScrollArea>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* Created Activities Section */}
           <Card>
             <CardHeader>
               <CardTitle>Created Activities ({activities.length})</CardTitle>
