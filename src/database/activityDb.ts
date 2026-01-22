@@ -280,6 +280,37 @@ export async function seedActivities(): Promise<void> {
                 creatorId: 'system',
                 createdAt: Math.floor(Date.now() / 1000),
             },
+            {
+                id: 'yoga-4',
+                title: 'Indoor Yoga for Beginners',
+                description: 'Beginner-friendly yoga session with simple movements and a calm pace.',
+                image: '/images/yoga3.jpg',
+                category: 'yoga',
+                location: 'Lahti Community Centre',
+                duration: 60,
+                numParticipants: 0,
+                date: new Date().toISOString().split('T')[0],
+                hour: '14:00',
+                status: 'active',
+                creatorId: 'system',
+                createdAt: Math.floor(Date.now() / 1000),
+            },
+
+             {
+                id: 'yoga-5',
+                title: 'Indoor Yoga for Beginners',
+                description: 'Beginner-friendly yoga session with simple movements and a calm pace.',
+                image: '/images/yoga3.jpg',
+                category: 'yoga',
+                location: 'Lahti Community Centre',
+                duration: 60,
+                numParticipants: 0,
+                date: new Date().toISOString().split('T')[0],
+                hour: '14:00',
+                status: 'active',
+                creatorId: 'system',
+                createdAt: Math.floor(Date.now() / 1000),
+            },
 
             // Hiking / walking (very Finland-appropriate)
             {
