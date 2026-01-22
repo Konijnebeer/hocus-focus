@@ -1,12 +1,13 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { getUser } from "@/database/userDb";
+import { getUser, seedUsers } from "@/database/userDb";
 import { getActivitiesByCreator } from "@/database/activityDb";
 import type { User } from "@/database/userDb";
 import type { Activity } from "@/database/activityDb";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/user/$id")({
   component: RouteComponent,
@@ -14,19 +15,27 @@ export const Route = createFileRoute("/user/$id")({
 
 function RouteComponent() {
   const { id } = Route.useParams();
+  const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
   const [activities, setActivities] = useState<Activity[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isOwnProfile, setIsOwnProfile] = useState(false);
 
   useEffect(() => {
     async function loadUserData() {
       try {
         setLoading(true);
+        // Ensure database is seeded before fetching user
+        await seedUsers();
         const userData = await getUser(id);
         if (userData) {
           setUser(userData);
           const userActivities = await getActivitiesByCreator(id);
           setActivities(userActivities);
+
+          // Check if this is the logged-in user's profile
+          const loggedInUserId = localStorage.getItem("loggedInUserId");
+          setIsOwnProfile(loggedInUserId === id);
         }
       } catch (error) {
         console.error("Failed to load user data:", error);
@@ -38,19 +47,24 @@ function RouteComponent() {
     loadUserData();
   }, [id]);
 
+  const handleLogout = () => {
+    localStorage.removeItem("loggedInUserId");
+    navigate({ to: "/login" });
+  };
+
   if (loading) {
     return (
-      <div className="container mx-auto p-6">
+      <main className="h-[70vh] container mx-auto p-6">
         <p className="text-center">Loading...</p>
-      </div>
+      </main>
     );
   }
 
   if (!user) {
     return (
-      <div className="container mx-auto p-6">
+      <main className="h-[70vh] container mx-auto p-6">
         <p className="text-center">User not found</p>
-      </div>
+      </main>
     );
   }
 
@@ -84,6 +98,15 @@ function RouteComponent() {
                 </Badge>
               )}
               <p className="text-sm text-muted-foreground">{user.email}</p>
+              {isOwnProfile && (
+                <Button
+                  variant="outline"
+                  className="mt-4 w-full"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </Button>
+              )}
             </CardContent>
           </Card>
         </div>

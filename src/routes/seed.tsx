@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { seedUsers, getUserCount, resetUsers } from "@/database/userDb";
-import { seedActivities, getActivityCount, resetActivities } from "@/database/activityDb";
+import { getUserCount, resetUsers } from "@/database/userDb";
+import { getActivityCount, resetActivities } from "@/database/activityDb";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
