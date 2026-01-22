@@ -20,6 +20,11 @@ export default function Header() {
         <nav className="text-foreground">
           <ul className="flex space-x-6 ml-12">
             <li>
+              <Link to="/" className="hover:underline">
+                Home
+              </Link>
+            </li>
+            <li>
               <Link to="/activity" className="hover:underline">
                 Activitys
               </Link>
@@ -46,11 +51,11 @@ export default function Header() {
                 <User />
               </HexButton>
             </Link>
-            <Link to="/">
+            {/*<Link to="/">
               <HexButton>
                 <List />
               </HexButton>
-            </Link>
+            </Link>*/}
           </div>
         </div>
       </div>
