@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import React, { useState, useEffect } from "react";
 import {
   getAllActivities,
-  resetActivities,
+  seedActivities,
   type Activity,
 } from "@/database/activityDb";
 import { ActivityCarousel } from "./-components/activity-carousel";
@@ -23,7 +23,7 @@ function RouteComponent() {
       try {
         setLoading(true);
         // Seed initial data if database is empty
-        await resetActivities();
+        await seedActivities();
         // Get all activities from database
         const allActivities = await getAllActivities();
         setActivities(allActivities);
