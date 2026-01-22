@@ -115,7 +115,7 @@ function RouteComponent() {
               <p className="text-sm text-muted-foreground">{user.email}</p>
               {isOwnProfile && (
                 <Button
-                  variant="outline"
+                  variant="secondary"
                   className="mt-4 w-full"
                   onClick={handleLogout}
                 >
@@ -134,7 +134,7 @@ function RouteComponent() {
               <CardTitle>About Me</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-muted-foreground">
+              <p className="text-white">
                 {user.description || "No description available."}
               </p>
             </CardContent>
@@ -156,7 +156,7 @@ function RouteComponent() {
                 <ScrollArea className="h-[400px] pr-4">
                   <div className="space-y-4">
                     {joinedActivities.map((activity) => (
-                      <Card key={activity.id}>
+                      <Card key={activity.id} className="bg-white">
                         <CardContent className="pt-4">
                           <div className="flex items-start gap-4">
                             {activity.image && (
@@ -170,7 +170,7 @@ function RouteComponent() {
                             )}
                             <div className="flex-1 min-w-0">
                               <div className="flex items-start justify-between gap-2 mb-2">
-                                <h3 className="font-semibold text-base line-clamp-1">
+                                <h3 className="font-semibold text-base line-clamp-1 text-[#461220]">
                                   {activity.title}
                                 </h3>
                                 <Badge
@@ -235,7 +235,7 @@ function RouteComponent() {
                 <ScrollArea className="h-[400px] pr-4">
                   <div className="space-y-4">
                     {activities.map((activity) => (
-                      <Card key={activity.id}>
+                      <Card key={activity.id} className="bg-white">
                         <CardContent className="pt-4">
                           <div className="flex items-start gap-4">
                             {activity.image && (
@@ -249,7 +249,7 @@ function RouteComponent() {
                             )}
                             <div className="flex-1 min-w-0">
                               <div className="flex items-start justify-between gap-2 mb-2">
-                                <h3 className="font-semibold text-base line-clamp-1">
+                                <h3 className="font-semibold text-base line-clamp-1 text-[#461220]">
                                   {activity.title}
                                 </h3>
                                 <Badge
