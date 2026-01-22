@@ -9,12 +9,31 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SignupRouteImport } from './routes/signup'
+import { Route as SeedRouteImport } from './routes/seed'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ActivityIndexRouteImport } from './routes/activity/index'
+import { Route as UserIdRouteImport } from './routes/user/$id'
 import { Route as ActivityCreateRouteImport } from './routes/activity/create'
 import { Route as DemoFormSimpleRouteImport } from './routes/demo/form.simple'
 import { Route as DemoFormAddressRouteImport } from './routes/demo/form.address'
 
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SeedRoute = SeedRouteImport.update({
+  id: '/seed',
+  path: '/seed',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -23,6 +42,11 @@ const IndexRoute = IndexRouteImport.update({
 const ActivityIndexRoute = ActivityIndexRouteImport.update({
   id: '/activity/',
   path: '/activity/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UserIdRoute = UserIdRouteImport.update({
+  id: '/user/$id',
+  path: '/user/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ActivityCreateRoute = ActivityCreateRouteImport.update({
@@ -43,14 +67,22 @@ const DemoFormAddressRoute = DemoFormAddressRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/seed': typeof SeedRoute
+  '/signup': typeof SignupRoute
   '/activity/create': typeof ActivityCreateRoute
+  '/user/$id': typeof UserIdRoute
   '/activity/': typeof ActivityIndexRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/seed': typeof SeedRoute
+  '/signup': typeof SignupRoute
   '/activity/create': typeof ActivityCreateRoute
+  '/user/$id': typeof UserIdRoute
   '/activity': typeof ActivityIndexRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
@@ -58,7 +90,11 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/seed': typeof SeedRoute
+  '/signup': typeof SignupRoute
   '/activity/create': typeof ActivityCreateRoute
+  '/user/$id': typeof UserIdRoute
   '/activity/': typeof ActivityIndexRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
@@ -67,21 +103,33 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/login'
+    | '/seed'
+    | '/signup'
     | '/activity/create'
+    | '/user/$id'
     | '/activity/'
     | '/demo/form/address'
     | '/demo/form/simple'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/login'
+    | '/seed'
+    | '/signup'
     | '/activity/create'
+    | '/user/$id'
     | '/activity'
     | '/demo/form/address'
     | '/demo/form/simple'
   id:
     | '__root__'
     | '/'
+    | '/login'
+    | '/seed'
+    | '/signup'
     | '/activity/create'
+    | '/user/$id'
     | '/activity/'
     | '/demo/form/address'
     | '/demo/form/simple'
@@ -89,7 +137,11 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LoginRoute: typeof LoginRoute
+  SeedRoute: typeof SeedRoute
+  SignupRoute: typeof SignupRoute
   ActivityCreateRoute: typeof ActivityCreateRoute
+  UserIdRoute: typeof UserIdRoute
   ActivityIndexRoute: typeof ActivityIndexRoute
   DemoFormAddressRoute: typeof DemoFormAddressRoute
   DemoFormSimpleRoute: typeof DemoFormSimpleRoute
@@ -97,6 +149,27 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/seed': {
+      id: '/seed'
+      path: '/seed'
+      fullPath: '/seed'
+      preLoaderRoute: typeof SeedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -109,6 +182,13 @@ declare module '@tanstack/react-router' {
       path: '/activity'
       fullPath: '/activity/'
       preLoaderRoute: typeof ActivityIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/user/$id': {
+      id: '/user/$id'
+      path: '/user/$id'
+      fullPath: '/user/$id'
+      preLoaderRoute: typeof UserIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/activity/create': {
@@ -137,7 +217,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LoginRoute: LoginRoute,
+  SeedRoute: SeedRoute,
+  SignupRoute: SignupRoute,
   ActivityCreateRoute: ActivityCreateRoute,
+  UserIdRoute: UserIdRoute,
   ActivityIndexRoute: ActivityIndexRoute,
   DemoFormAddressRoute: DemoFormAddressRoute,
   DemoFormSimpleRoute: DemoFormSimpleRoute,
