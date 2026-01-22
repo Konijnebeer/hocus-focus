@@ -7,17 +7,18 @@ export default function Header() {
   return (
     <header className="p-4">
       <div className="flex items-center">
-        <h1 className="ml-4 text-xl font-semibold text-foreground">
+        <h1 className="ml-6 text-xl font-semibold text-foreground">
           <Link to="/">
             <img
-              src="/tanstack-word-logo-white.svg"
-              alt="TanStack Logo"
-              className="h-10"
+              src="src\images\Logo.png"
+              alt="Logo"
+              className="h-16"
             />
           </Link>
         </h1>
+        <h2 className="ml-10 text-[32px] text-foreground">Connectar</h2>
         <nav className="text-foreground">
-          <ul className="flex space-x-6 ml-10">
+          <ul className="flex space-x-6 ml-12">
             <li>
               <Link to="/" className="hover:underline">
                 Home
@@ -25,7 +26,7 @@ export default function Header() {
             </li>
             <li>
               <Link to="/activity" className="hover:underline">
-                Activitys
+                Activities
               </Link>
             </li>
             <li>
