@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import React, { useState, useEffect } from "react";
 import {
   getAllActivities,
-  seedActivities,
+  resetActivities,
   type Activity,
 } from "@/database/activityDb";
 import { ActivityCarousel } from "./-components/activity-carousel";
@@ -23,7 +23,7 @@ function RouteComponent() {
       try {
         setLoading(true);
         // Seed initial data if database is empty
-        await seedActivities();
+        await resetActivities();
         // Get all activities from database
         const allActivities = await getAllActivities();
         setActivities(allActivities);
@@ -80,28 +80,28 @@ function RouteComponent() {
   }
 
   return (
-    <main className="min-h-screen">
+    <main className="h-[70vh] py-8 px-12">
       <Tabs defaultValue="yoga" className="w-full px-4 pt-4">
         <TabsList>
           <TabsTrigger value="yoga">Yoga</TabsTrigger>
           <TabsTrigger value="hiking">Hiking</TabsTrigger>
           <TabsTrigger value="pilates">Pilates</TabsTrigger>
         </TabsList>
-        <TabsContent value="yoga">
+        <TabsContent value="yoga" className="pt-6">
           <ActivityCarousel
             activities={yogaData}
             prevButtonPosition="left-[30%]"
             nextButtonPosition="right-[30%]"
           />
         </TabsContent>
-        <TabsContent value="hiking">
+        <TabsContent value="hiking" className="pt-6">
           <ActivityCarousel
             activities={hikingData}
             prevButtonPosition="left-[25%]"
             nextButtonPosition="right-[25%]"
           />
         </TabsContent>
-        <TabsContent value="pilates">
+        <TabsContent value="pilates" className="pt-6">
           <ActivityCarousel
             activities={pilatesData}
             prevButtonPosition="left-[25%]"
