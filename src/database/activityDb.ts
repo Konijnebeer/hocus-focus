@@ -242,7 +242,7 @@ export async function seedActivities(): Promise<void> {
         title: "Morning Mama Yoga",
         description:
           "Gentle yoga for new moms. Bring your baby if needed! Focus on breathing, gentle stretches, and connecting with other mothers.",
-        image: "/images/yoga1.jpg",
+        image: "/images/pexels-polina-tankilevitch-8539124.jpg",
         category: "yoga",
         location: "Pikku-Vesijärvi Park, Lahti",
         duration: 60,
@@ -258,7 +258,7 @@ export async function seedActivities(): Promise<void> {
         title: "Mindful Mom Meditation & Stretch",
         description:
           "Calm your mind and stretch your body. Perfect for busy moms needing a peaceful moment.",
-        image: "/images/yoga2.jpg",
+        image: "/images/pexels-yankrukov-8436715.jpg",
         category: "yoga",
         location: "Radiomäki Park, Lahti",
         duration: 45,
@@ -274,7 +274,7 @@ export async function seedActivities(): Promise<void> {
         title: "Postnatal Yoga Flow",
         description:
           "Designed specifically for recovery. Gentle movements to rebuild strength and flexibility.",
-        image: "/images/yoga3.jpg",
+        image: "/images/pexels-yankrukov-8436685.jpg",
         category: "yoga",
         location: "Lahti Community Centre",
         duration: 60,
@@ -290,7 +290,7 @@ export async function seedActivities(): Promise<void> {
         title: "Yoga for Tired Moms",
         description:
           "Low-energy yoga session focusing on relaxation and simple stretches. No experience needed!",
-        image: "/images/yoga1.jpg",
+        image: "/images/pexels-ketut-subiyanto-4998823.jpg",
         category: "yoga",
         location: "Lahti Family Center",
         duration: 50,
@@ -306,7 +306,7 @@ export async function seedActivities(): Promise<void> {
         title: "Weekend Wellness Yoga",
         description:
           "Saturday morning yoga for moms. Kids welcome to play nearby while we practice mindfulness.",
-        image: "/images/yoga2.jpg",
+        image: "/images/yoga1.jpg",
         category: "yoga",
         location: "Lahti Sports Park Outdoor Area",
         duration: 60,
@@ -322,7 +322,7 @@ export async function seedActivities(): Promise<void> {
         title: "Beginner Mom Yoga",
         description:
           "Never done yoga? Perfect! This class is designed for complete beginners who are moms.",
-        image: "/images/yoga3.jpg",
+        image: "/images/pexels-shvetsa-4587346.jpg",
         category: "yoga",
         location: "Fellmanni Library Hall, Lahti",
         duration: 55,
@@ -338,7 +338,7 @@ export async function seedActivities(): Promise<void> {
         title: "Evening Relaxation Yoga",
         description:
           "End your day peacefully with gentle yoga and deep relaxation techniques for busy mothers.",
-        image: "/images/yoga1.jpg",
+        image: "/images/pexels-polina-tankilevitch-8538994.jpg",
         category: "yoga",
         location: "Lahti Wellness Studio",
         duration: 60,
@@ -356,7 +356,7 @@ export async function seedActivities(): Promise<void> {
         title: "Stroller-Friendly Nature Walk",
         description:
           "Easy walking paths suitable for strollers. Meet other moms while enjoying fresh Finnish air!",
-        image: "/images/hiking1.jpg",
+        image: "/images/pexels-josh-willink-11499-1157386.jpg",
         category: "hiking",
         location: "Salpausselkä Trail (Easy Section), Lahti",
         duration: 75,
@@ -372,7 +372,7 @@ export async function seedActivities(): Promise<void> {
         title: "Mom & Tot Forest Adventure",
         description:
           "Slow-paced forest walk with stops for kids to explore nature. Toddlers welcome!",
-        image: "/images/hiking2.jpg",
+        image: "/images/pexels-pnw-prod-7624913.jpg",
         category: "hiking",
         location: "Messilä Nature Reserve, Lahti",
         duration: 90,
