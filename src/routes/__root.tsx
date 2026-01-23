@@ -13,7 +13,7 @@ export const Route = createRootRoute({
         <Outlet />
       <Footer />
       </div>
-      <TanStackDevtools
+      {/* <TanStackDevtools
         config={{
           position: "bottom-right",
         }}
@@ -23,7 +23,7 @@ export const Route = createRootRoute({
             render: <TanStackRouterDevtoolsPanel />,
           },
         ]}
-      />
+      /> */}
     </>
   ),
 });
