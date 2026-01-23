@@ -251,7 +251,7 @@ export async function seedActivities(): Promise<void> {
         hour: "09:00",
         status: "active",
         creatorId: "user-1",
-        createdAt: Math.floor(Date.now() / 1000),
+        createdAt: Math.floor(new Date('2026-01-21').getTime() / 1000),
       },
       {
         id: "yoga-2",
@@ -267,7 +267,7 @@ export async function seedActivities(): Promise<void> {
         hour: "10:00",
         status: "active",
         creatorId: "user-2",
-        createdAt: Math.floor(Date.now() / 1000),
+        createdAt: Math.floor(new Date('2026-01-13').getTime() / 1000),
       },
       {
         id: "yoga-3",
@@ -283,7 +283,7 @@ export async function seedActivities(): Promise<void> {
         hour: "11:00",
         status: "active",
         creatorId: "user-9",
-        createdAt: Math.floor(Date.now() / 1000),
+        createdAt: Math.floor(new Date('2026-01-29').getTime() / 1000),
       },
       {
         id: "yoga-4",
@@ -299,7 +299,7 @@ export async function seedActivities(): Promise<void> {
         hour: "14:00",
         status: "active",
         creatorId: "user-2",
-        createdAt: Math.floor(Date.now() / 1000),
+        createdAt: Math.floor(new Date('2026-02-02').getTime() / 1000),
       },
       {
         id: "yoga-5",
@@ -315,7 +315,7 @@ export async function seedActivities(): Promise<void> {
         hour: "09:30",
         status: "active",
         creatorId: "admin-1",
-        createdAt: Math.floor(Date.now() / 1000),
+        createdAt: Math.floor(new Date('2026-01-15').getTime() / 1000),
       },
       {
         id: "yoga-6",
@@ -331,7 +331,7 @@ export async function seedActivities(): Promise<void> {
         hour: "10:30",
         status: "active",
         creatorId: "user-1",
-        createdAt: Math.floor(Date.now() / 1000),
+        createdAt: Math.floor(new Date('2026-02-15').getTime() / 1000),
       },
       {
         id: "yoga-7",
@@ -347,7 +347,7 @@ export async function seedActivities(): Promise<void> {
         hour: "18:00",
         status: "active",
         creatorId: "user-9",
-        createdAt: Math.floor(Date.now() / 1000),
+        createdAt: Math.floor(new Date('2026-01-30').getTime() / 1000),
       },
 
       // HIKING ACTIVITIES (3 total)
@@ -365,7 +365,7 @@ export async function seedActivities(): Promise<void> {
         hour: "10:00",
         status: "active",
         creatorId: "user-3",
-        createdAt: Math.floor(Date.now() / 1000),
+        createdAt: Math.floor(new Date('2026-02-04').getTime() / 1000),
       },
       {
         id: "hiking-2",
@@ -381,14 +381,14 @@ export async function seedActivities(): Promise<void> {
         hour: "11:00",
         status: "active",
         creatorId: "user-8",
-        createdAt: Math.floor(Date.now() / 1000),
+        createdAt: Math.floor(new Date('2026-02-05').getTime() / 1000),
       },
       {
         id: "hiking-3",
         title: "Lakeside Walking Group",
         description:
           "Beautiful walk around Vesijärvi Lake. Perfect for chatting with other moms while staying active.",
-        image: "/images/hiking1.jpg",
+        image: "/images/pexels-josh-willink-11499-701016.jpg",
         category: "hiking",
         location: "Vesijärvi Lakeside Path, Lahti",
         duration: 60,
@@ -397,7 +397,7 @@ export async function seedActivities(): Promise<void> {
         hour: "14:00",
         status: "active",
         creatorId: "user-3",
-        createdAt: Math.floor(Date.now() / 1000),
+        createdAt: Math.floor(new Date('2026-01-29').getTime() / 1000),
       },
 
       // PILATES ACTIVITIES (5 total)
@@ -406,7 +406,7 @@ export async function seedActivities(): Promise<void> {
         title: "Core Restore Pilates",
         description:
           "Focus on rebuilding core strength after pregnancy. Suitable for all postnatal stages.",
-        image: "/images/pilates1.jpg",
+        image: "/images/pexels-gustavo-fring-3984361.jpg",
         category: "pilates",
         location: "Lahti Family Wellness Center",
         duration: 50,
@@ -415,14 +415,14 @@ export async function seedActivities(): Promise<void> {
         hour: "09:30",
         status: "active",
         creatorId: "user-7",
-        createdAt: Math.floor(Date.now() / 1000),
+        createdAt: Math.floor(new Date('2026-02-10').getTime() / 1000),
       },
       {
         id: "pilates-2",
         title: "Gentle Mat Pilates for Moms",
         description:
           "Low-impact pilates session focusing on flexibility and gentle strengthening.",
-        image: "/images/pilates2.jpg",
+        image: "/images/pexels-n1ch01as-9288130.jpg",
         category: "pilates",
         location: "Laune Family Park, Lahti",
         duration: 45,
@@ -431,14 +431,14 @@ export async function seedActivities(): Promise<void> {
         hour: "10:30",
         status: "active",
         creatorId: "user-5",
-        createdAt: Math.floor(Date.now() / 1000),
+        createdAt: Math.floor(new Date('2026-02-10').getTime() / 1000),
       },
       {
         id: "pilates-3",
         title: "Postnatal Pilates Recovery",
         description:
           "Specialized pilates for new mothers. Safe exercises for everyone.",
-        image: "/images/pilates3.jpg",
+        image: "/images/pexels-n1ch01as-9288130.jpg",
         category: "pilates",
         location: "Lahti Community Health Centre",
         duration: 45,
@@ -447,14 +447,14 @@ export async function seedActivities(): Promise<void> {
         hour: "13:00",
         status: "active",
         creatorId: "user-7",
-        createdAt: Math.floor(Date.now() / 1000),
+        createdAt: Math.floor(new Date('2026-02-06').getTime() / 1000),
       },
       {
         id: "pilates-4",
         title: "Pilates for Busy Moms",
         description:
           "45-minute effective pilates session that fits into your busy schedule.",
-        image: "/images/pilates1.jpg",
+        image: "/images/pexels-gustavo-fring-8769164.jpg",
         category: "pilates",
         location: "Lahti Adult Education Centre",
         duration: 45,
@@ -463,14 +463,14 @@ export async function seedActivities(): Promise<void> {
         hour: "15:00",
         status: "active",
         creatorId: "admin-1",
-        createdAt: Math.floor(Date.now() / 1000),
+        createdAt: Math.floor(new Date('2026-02-23').getTime() / 1000),
       },
       {
         id: "pilates-5",
         title: "Strength & Stretch Pilates",
         description:
           "Balance strength building with relaxing stretches. All fitness levels welcome!",
-        image: "/images/pilates2.jpg",
+        image: "/images/pexels-ketut-subiyanto-4998823.jpg",
         category: "pilates",
         location: "Lahti Sports Center Studio",
         duration: 60,
