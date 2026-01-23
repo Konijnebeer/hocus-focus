@@ -388,7 +388,7 @@ export async function seedActivities(): Promise<void> {
         title: "Lakeside Walking Group",
         description:
           "Beautiful walk around Vesijärvi Lake. Perfect for chatting with other moms while staying active.",
-        image: "/images/pexels-josh-willink-11499-701016.jpg",
+        image: "/images/pexels-introspectivedsgn-4365382.jpg",
         category: "hiking",
         location: "Vesijärvi Lakeside Path, Lahti",
         duration: 60,
