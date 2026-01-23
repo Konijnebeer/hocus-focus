@@ -202,9 +202,13 @@ function RouteComponent() {
                   )}
                 </Button>
               ) : (
-                <Link to="/signup">
-                  <Button size="lg" variant="secondary">Create Account</Button>
-                </Link>
+                !isCreator && (
+                  <Link to="/signup">
+                    <Button size="lg" variant="secondary">
+                      Create Account
+                    </Button>
+                  </Link>
+                )
               )}
             </div>
           </CardHeader>
