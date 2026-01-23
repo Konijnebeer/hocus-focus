@@ -356,7 +356,7 @@ export async function seedActivities(): Promise<void> {
         title: "Stroller-Friendly Nature Walk",
         description:
           "Easy walking paths suitable for strollers. Meet other moms while enjoying fresh Finnish air!",
-        image: "/images/pexels-josh-willink-11499-1157386.jpg",
+        image: "/images/pexels-josh-willink-11499-701016.jpg",
         category: "hiking",
         location: "Salpausselkä Trail (Easy Section), Lahti",
         duration: 75,
@@ -372,7 +372,7 @@ export async function seedActivities(): Promise<void> {
         title: "Mom & Tot Forest Adventure",
         description:
           "Slow-paced forest walk with stops for kids to explore nature. Toddlers welcome!",
-        image: "/images/pexels-pnw-prod-7624913.jpg",
+        image: "/images/pexels-pixabay-236973.jpg",
         category: "hiking",
         location: "Messilä Nature Reserve, Lahti",
         duration: 90,
