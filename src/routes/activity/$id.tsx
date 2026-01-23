@@ -167,11 +167,11 @@ function RouteComponent() {
   const canJoinLeave = currentUserId && !isCreator;
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
       <div className="container mx-auto px-4 py-8 max-w-5xl">
         {/* Activity Header */}
         <Card className="mb-6 bg-primary text-primary-foreground border-primary shadow-lg">
-          <CardHeader className="pb-4">
+          <CardHeader>
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
               <div>
                 <CardTitle className="text-3xl font-bold mb-2">
