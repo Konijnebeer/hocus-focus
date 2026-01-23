@@ -181,7 +181,7 @@ function RouteComponent() {
                   {activity.category}
                 </Badge>
               </div>
-              {canJoinLeave && (
+              {canJoinLeave ? (
                 <Button
                   onClick={handleJoinLeave}
                   disabled={isJoining}
@@ -201,13 +201,17 @@ function RouteComponent() {
                     </>
                   )}
                 </Button>
+              ) : (
+                <Link to="/signup">
+                  <Button size="lg" variant="secondary">Create Account</Button>
+                </Link>
               )}
             </div>
           </CardHeader>
         </Card>
 
         {/* Activity Image */}
-        <Card className="mb-6 overflow-hidden bg-primary border-primary">
+        <Card className="mb-6 overflow-hidden bg-primary border-primary p-0 border-0">
           <CardContent className="p-0">
             <div className="relative h-96 bg-gradient-to-br from-primary/20 to-primary/40">
               {activity.image ? (
