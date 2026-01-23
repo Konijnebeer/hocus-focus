@@ -196,7 +196,7 @@ export async function seedUsers(): Promise<void> {
         password: "admin123",
         description:
           "Hocus Focus community administrator. Mother of two, dedicated to helping moms in Lahti stay active and connected.",
-        picture: "/images/admin.jpg",
+        picture: "/images/Screenshot 2026-01-23 at 10.59.42.png",
         role: "Administrator",
         createdAt: Math.floor(Date.now() / 1000),
       },
@@ -208,7 +208,7 @@ export async function seedUsers(): Promise<void> {
         password: "password123",
         description:
           "Mom of a 2-year-old. Love yoga and meeting other moms for outdoor activities. Looking to stay active while my little one naps!",
-        picture: "/images/user1.jpg",
+        picture: "/images/Screenshot 2026-01-23 at 10.59.48.png",
         role: "Active Mom",
         createdAt: Math.floor(Date.now() / 1000),
       },
@@ -220,7 +220,7 @@ export async function seedUsers(): Promise<void> {
         password: "password123",
         description:
           "Mother of twin girls (6 months). Former yoga instructor, now focusing on gentle exercises and connecting with other new moms.",
-        picture: "/images/user2.jpg",
+        picture: "/images/Screenshot 2026-01-23 at 11.16.47.png",
         role: "New Mom",
         createdAt: Math.floor(Date.now() / 1000),
       },
@@ -232,7 +232,7 @@ export async function seedUsers(): Promise<void> {
         password: "password123",
         description:
           "Mom of a 3-year-old boy. Love hiking and being in nature. Always looking for stroller-friendly walking groups!",
-        picture: "/images/user3.jpg",
+        picture: "/images/Screenshot 2026-01-23 at 11.14.48.jpg",
         role: "Outdoor Enthusiast",
         createdAt: Math.floor(Date.now() / 1000),
       },
@@ -244,7 +244,7 @@ export async function seedUsers(): Promise<void> {
         password: "password123",
         description:
           "First-time mom with a 4-month-old. Trying to get back into shape with gentle pilates and yoga.",
-        picture: "/images/user4.jpg",
+        picture: "/images/Screenshot 2026-01-23 at 11.14.26.png",
         role: "First-Time Mom",
         createdAt: Math.floor(Date.now() / 1000),
       },
@@ -256,7 +256,7 @@ export async function seedUsers(): Promise<void> {
         password: "password123",
         description:
           "Mom of two (ages 1 and 4). Pilates enthusiast and love organizing playdate activities for kids while we exercise!",
-        picture: "/images/user5.jpg",
+        picture: "/images/Screenshot 2026-01-23 at 11.15.45.png",
         role: "Active Mom",
         createdAt: Math.floor(Date.now() / 1000),
       },
@@ -268,7 +268,7 @@ export async function seedUsers(): Promise<void> {
         password: "password123",
         description:
           "New to Lahti with my 18-month-old daughter. Looking to meet other moms and stay active together.",
-        picture: "/images/user6.jpg",
+        picture: "/images/Screenshot 2026-01-23 at 11.06.02.png",
         role: "New to Lahti",
         createdAt: Math.floor(Date.now() / 1000),
       },
@@ -280,7 +280,7 @@ export async function seedUsers(): Promise<void> {
         password: "password123",
         description:
           "Mom of a 5-year-old and 2-year-old. Certified pilates instructor offering beginner-friendly sessions for busy moms.",
-        picture: "/images/user7.jpg",
+        picture: "/images/pexels-hasmukh-abchung-413074376-34770070.jpg",
         role: "Pilates Instructor",
         createdAt: Math.floor(Date.now() / 1000),
       },
@@ -292,7 +292,7 @@ export async function seedUsers(): Promise<void> {
         password: "password123",
         description:
           "Mother of three. Love the outdoors and organizing hiking groups for moms. Fresh air is the best medicine!",
-        picture: "/images/user8.jpg",
+        picture: "/images/pexels-dantemunozphoto-16259515.jpg",
         role: "Hiking Organizer",
         createdAt: Math.floor(Date.now() / 1000),
       },
@@ -304,7 +304,7 @@ export async function seedUsers(): Promise<void> {
         password: "password123",
         description:
           "Mom of a 1-year-old. Yoga has been my sanctuary during motherhood. Love sharing calm, mindful practices with other moms.",
-        picture: "/images/user9.jpg",
+        picture: "/images/home/miko/Downloads/pexels-buusecolak-30321633.jpg",
         role: "Yoga Enthusiast",
         createdAt: Math.floor(Date.now() / 1000),
       },
