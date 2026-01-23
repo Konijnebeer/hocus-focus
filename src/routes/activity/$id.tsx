@@ -167,11 +167,11 @@ function RouteComponent() {
   const canJoinLeave = currentUserId && !isCreator;
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
       <div className="container mx-auto px-4 py-8 max-w-5xl">
         {/* Activity Header */}
         <Card className="mb-6 bg-primary text-primary-foreground border-primary shadow-lg">
-          <CardHeader className="pb-4">
+          <CardHeader>
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
               <div>
                 <CardTitle className="text-3xl font-bold mb-2">
@@ -181,7 +181,7 @@ function RouteComponent() {
                   {activity.category}
                 </Badge>
               </div>
-              {canJoinLeave && (
+              {canJoinLeave ? (
                 <Button
                   onClick={handleJoinLeave}
                   disabled={isJoining}
@@ -201,13 +201,17 @@ function RouteComponent() {
                     </>
                   )}
                 </Button>
+              ) : (
+                <Link to="/signup">
+                  <Button size="lg" variant="secondary">Create Account</Button>
+                </Link>
               )}
             </div>
           </CardHeader>
         </Card>
 
         {/* Activity Image */}
-        <Card className="mb-6 overflow-hidden bg-primary border-primary">
+        <Card className="mb-6 overflow-hidden bg-primary border-primary p-0 border-0">
           <CardContent className="p-0">
             <div className="relative h-96 bg-gradient-to-br from-primary/20 to-primary/40">
               {activity.image ? (

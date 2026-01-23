@@ -10,11 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import {
-  Field,
-  FieldLabel,
-  FieldError,
-} from "@/components/ui/field";
+import { Field, FieldLabel, FieldError } from "@/components/ui/field";
 import { useState } from "react";
 
 export const Route = createFileRoute("/login")({
@@ -63,7 +59,9 @@ function RouteComponent() {
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl">Welcome Back</CardTitle>
-          <CardDescription className="text-secondary">Sign in to your account</CardDescription>
+          <CardDescription className="text-secondary">
+            Sign in to your account
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <form
@@ -134,7 +132,7 @@ function RouteComponent() {
           </form>
           <div className="mt-4 text-center text-sm text-secondary">
             <p>Test accounts:</p>
-            <p>emma.virtanen@email.com / password123</p>
+            <p>sanna.virtanen@email.com / password123</p>
             <p className="mt-2">
               Don't have an account?{" "}
               <a

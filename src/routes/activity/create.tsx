@@ -105,8 +105,8 @@ function RouteComponent() {
   });
 
   return (
-    <main className="min-h-screen bg-background flex flex-col items-center py-12 px-4">
-      <div className="w-full max-w-2xl">
+    <main className="min-h-screen flex flex-col items-center py-12 px-4">
+      <div className="w-full max-w-2xl bg-background p-4 rounded-lg shadow-md">
         <h1 className="text-3xl font-bold mb-8 text-center text-foreground">
           Create New Activity
         </h1>
